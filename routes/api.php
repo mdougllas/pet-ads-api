@@ -35,6 +35,8 @@ Route::get('/token', function(Request $request) {
 
         $resultJson = json_decode($result);
 
+        if(!$resultJson) return 'Petfinder API unavailable.';
+
         $request->session()->put(['petFinderToken' => $resultJson->access_token]);
         $request->session()->put(['time' => time()]);
         return $result;
